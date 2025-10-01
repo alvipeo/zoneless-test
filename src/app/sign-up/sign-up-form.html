@@ -1,0 +1,67 @@
+<h1>Sign Up</h1>
+<p>Please sign up to to use this app:</p>
+<form #formDirective="ngForm" [formGroup]="frm" (ngSubmit)="onSubmit()">
+   <fieldset>
+      <legend color="primary" i18n="@@regValidEmail">Valid Email Address</legend>
+      <div class="two-cols">
+         <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+               autocomplete="off"
+               formControlName="email"
+               matInput
+               placeholder="yourname@domain.com"
+               required
+               type="email"
+               (change)="emailChanged()" />
+            @if (emailCrl?.invalid) {
+            <mat-error>{{ getErrorMessage("email") }}</mat-error>
+            }
+         </mat-form-field>
+         @if (!store.isCodeSent()) {
+         <div>
+            <button
+               class="btn-next2fld send-ver-code"
+               color="primary"
+               mat-flat-button
+               type="button"
+               [disabled]="emailCrl?.invalid || store.inProgress()"
+               (click)="sendCode()">
+               @if (store.inProgress()) {
+               <mat-icon><mat-spinner diameter="18" /></mat-icon>
+               } @else {
+               <mat-icon>check</mat-icon>
+               }
+               <ng-container i18n="@@regSendVerifCode">Send verification code</ng-container>
+            </button>
+         </div>
+         } @else {
+         <mat-form-field appearance="fill">
+            <mat-label i18n="@@regVerifCodeLbl">Verification Code</mat-label>
+            <input autocomplete="off" formControlName="code" matInput placeholder="Code from email" required type="text" (change)="validateCode()" />
+            @if(isTouchedAndInvalid('code')) {
+            <mat-error>{{ getErrorMessage("code") }}</mat-error>
+            } @if (store.emailVerified() && this.codeCrl?.valid) {
+            <mat-icon matSuffix>check</mat-icon>
+            }
+         </mat-form-field>
+         @if (!store.emailVerified()) {
+         <div class="pb-1 text-center">
+            <p>
+               <ng-container i18n="@@regPlsCheckUrMailbox">Please check your mailbox</ng-container>.<br /><ng-container i18n="@@regWillReqCodeAgain"
+                  >You will be able to request the code again in</ng-container
+               >
+               {{ timeUntilNextSendAllowed$ | async }}
+            </p>
+         </div>
+         } }
+      </div>
+   </fieldset>
+
+   <p>...other fields</p>
+
+   <!-- <mat-divider></mat-divider> -->
+   <div class="pb--5 text-center">
+      <button mat-fab type="submit" [disabled]="!canSaveForm"><mat-icon>how_to_reg</mat-icon></button>
+   </div>
+</form>

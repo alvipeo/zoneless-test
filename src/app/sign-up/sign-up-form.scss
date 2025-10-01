@@ -1,0 +1,18 @@
+/*
+
+ Forms / alexb
+
+*/
+fieldset {
+   border: none;
+   padding: 0;
+
+   legend {
+      padding: 0.2em 0.5em 0.2em 0;
+      // margin-left: 5px;
+      font-size: 90%;
+      font-weight: 400;
+      text-transform: uppercase;
+      position: relative;
+   }
+}

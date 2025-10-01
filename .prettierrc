@@ -1,0 +1,12 @@
+{
+   "bracketSameLine": true,
+   "endOfLine": "auto",
+   "printWidth": 150,
+   "tabWidth": 3,
+   "tabs": false,
+   "trailingComma": "none",
+   "singleQuote": false,
+   "semicolon": true,
+   "quoteProps": "preserve",
+   "bracketSpacing": true
+}
