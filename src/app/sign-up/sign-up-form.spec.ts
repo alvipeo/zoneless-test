@@ -61,7 +61,11 @@ describe("sign up form should", () => {
 
       expect(fakeVerificationSvc.sendVerificationCode).toHaveBeenCalled();
 
+      jasmine.clock().tick(600);
+
       await pageObj.fixture.whenStable();
+
+      jasmine.clock().tick(600);
 
       const verCodeFld = await pageObj.verificationCodeHardness;
       expect(verCodeFld).toBeDefined();
