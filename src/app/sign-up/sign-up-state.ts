@@ -40,10 +40,12 @@ export const SignUpStore = signalStore(
                // so, let's not do this  ===>  distinctUntilChanged(),
                tap(() => patchState(store, { inProgress: true })),
                switchMap((email) => {
+                  console.log("HERERERH");
+
                   const obs$ = userVerifySvc.sendVerificationCode(email);
 
-                  if (!obs$)
-                     console.warn("NULL");
+                  // if (!obs$)
+                  //    console.warn("NULL");
 
                   return obs$.pipe(
                      tapResponse({

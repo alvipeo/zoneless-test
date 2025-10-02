@@ -3,6 +3,7 @@ import { TestBed } from "@angular/core/testing";
 import { SignUpPageObject } from "./page-object.spec";
 import { IlgSignUpForm } from "./sign-up-form";
 import { FakeUserVerificationService } from "./user-verification-service/fake-verification-service.spec";
+import { SignUpStore } from "./sign-up-state";
 
 describe("sign up form should", () => {
    //
@@ -41,7 +42,9 @@ describe("sign up form should", () => {
 
       const code = 484637;
       const fakeVerificationSvc = new FakeUserVerificationService(code);
-      spyOn(fakeVerificationSvc, "sendVerificationCode");
+
+      // IMPORTANT !!! => .and.callThrough();
+      spyOn(fakeVerificationSvc, "sendVerificationCode").and.callThrough();
 
       const pageObj = new SignUpPageObject(fakeVerificationSvc);
 

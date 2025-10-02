@@ -10,25 +10,25 @@ import { SignUpStore } from "./sign-up-state";
 
 export class SignUpPageObject {
    constructor(fakeVerificationSvc: FakeUserVerificationService) {
-      // TestBed.overrideComponent(IlgSignUpForm, {
-      //    set: {
-      //       providers: [
-      //          {
-      //             provide: UserVerificationService,
-      //             useValue: fakeVerificationSvc
-      //          },
-      //          { provide: SignUpStore }
-      //       ]
-      //    }
-      // });
-
-      // TestBed.overrideProvider(UserVerificationService, { useValue: fakeVerificationSvc });
-      TestBed.overrideProvider(UserVerificationService, { useValue: fakeVerificationSvc });
       TestBed.overrideComponent(IlgSignUpForm, {
          set: {
-            providers: [{ provide: SignUpStore }]
+            providers: [
+               {
+                  provide: UserVerificationService,
+                  useValue: fakeVerificationSvc
+               },
+               SignUpStore
+            ]
          }
       });
+      // TestBed.overrideProvider(UserVerificationService, { useValue: fakeVerificationSvc });
+
+      //TestBed.overrideProvider(UserVerificationService, { useValue: fakeVerificationSvc });
+      // TestBed.overrideComponent(IlgSignUpForm, {
+      //    set: {
+      //       providers: [{ provide: SignUpStore }]
+      //    }
+      // });
 
       this.fixture = TestBed.createComponent(IlgSignUpForm);
       this.component = this.fixture.componentInstance;
