@@ -39,6 +39,7 @@ describe("sign up form should", () => {
    fit("show verification field", async () => {
       jasmine.clock().install();
       jasmine.clock().mockDate();
+      jasmine.clock().autoTick();
 
       const code = 484637;
       const fakeVerificationSvc = new FakeUserVerificationService(code);
